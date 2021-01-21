@@ -33,11 +33,19 @@ control" %>
     </tr>
     
     <% sum = 0 %>
+    <% income = 0 %>
+    
     <% @books.each do |book|%>
     <!--データ情報とボタンをデータ数分繰り返す-->
     <tr>
         <td><%= book.year %>年<%= book.month %>月</td>
-        <td><%= book.inout %></td>
+        <td>
+            <%if book.inout == 1 then%>
+                <%= book.inout %> 収入
+            <% else %>
+                <%= book.inout %> 支出
+            <% end %>
+        </td>
         <td><%= book.category %></td>
         <td><%= book.amount %>万円</td>
         <td>
@@ -52,15 +60,17 @@ control" %>
     </tr>
         <% if book.inout == 1 %>
             <% sum += book.amount %>
+            <% income += book.amount%>
         <% else %>
             <% sum -= book.amount %>
+
         <% end %>
     <% end %>
     <tr>
         <td></td>
         <td></td>
         <td>合計</td>
-        <td><%= sum %>万円</td>
+        <td><%= sum %>万円（収入:<%= income %>万円、支出:<%= (sum - income).abs%>万円）</td>
         <td></td>
     </tr>
 </table>
