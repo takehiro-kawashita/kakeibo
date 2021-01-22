@@ -10,4 +10,11 @@ Rails.application.routes.draw do
   # delete "/books/:id",to:"books#destroy"#URLとdeleteのHTTPメソッドがきたら、books_controllerのdeleteメソッドを実行
   
   resources :books
+  
+  get "/signup",to: "users#new"
+  post "/signup",to: "users#create"
+  get "/signin",to: "session#new"
+  post "/signin",to: "session#create"
+  get "/signout",to: "session#destroy"
+  
 end

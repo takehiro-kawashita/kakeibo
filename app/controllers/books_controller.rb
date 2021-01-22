@@ -1,6 +1,7 @@
 class BooksController < ApplicationController
     
     before_action :set_book,only:[:show,:edit,:update,:destroy]
+    before_action :redirect_to_signin
     
     def index
         @books = Book.all #家計簿データをすべて取得(allメソッド)
@@ -40,7 +41,7 @@ class BooksController < ApplicationController
         if @book.update(book_params)
             flash[:notice] = "データを１件更新しました。"
             # redirect_to books_path
-            redirect_to book_path
+            redirect_to book_path(@book)
              #データを.updateメソッドで更新したら一覧画面に移る
         else
             flash.now[:alert] = "更新に失敗しました。"
@@ -57,6 +58,10 @@ class BooksController < ApplicationController
     
     def set_book
         @book = Book.find(params[:id])
+    end
+    
+    def redirect_to_signin
+        redirect_to signin_path if session[:user_id].blank?
     end
     
     def set_params
