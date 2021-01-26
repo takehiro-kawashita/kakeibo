@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   # get "/books/:id",to:"books#show",as:"book" #リクエストがきたらbooks_controllerのshowメソッドを実行
   # patch "/books/:id",to:"books#update"#URLとpatchのHTTPメソッドがきたら、books_controllerのupdateメソッドを実行
   # delete "/books/:id",to:"books#destroy"#URLとdeleteのHTTPメソッドがきたら、books_controllerのdeleteメソッドを実行
+  root to: "books#index"
   
   resources :books
   
@@ -15,6 +16,8 @@ Rails.application.routes.draw do
   post "/signup",to: "users#create"
   get "/signin",to: "session#new"
   post "/signin",to: "session#create"
+  get "/users/edit",to: "users#edit",as: "edit_user"
+  patch "/users",to: "users#update",as: "user"
   get "/signout",to: "session#destroy"
-  
+
 end

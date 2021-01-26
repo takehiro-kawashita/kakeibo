@@ -4,7 +4,7 @@ class BooksController < ApplicationController
     before_action :redirect_to_signin
     
     def index
-        @books = Book.all #家計簿データをすべて取得(allメソッド)
+        @books = Book.where(user_id: session[:user_id]) #家計簿データをすべて取得(allメソッド)
         @books = @books.where(year: params[:year]) if params[:year].present?
         @books = @books.where(month: params[:month]) if params[:month].present?
     end
@@ -20,6 +20,7 @@ class BooksController < ApplicationController
     def create
         book_params = set_params
         #ストロングパラメータで登録に必要なデータを取り出す。
+        book_params[:user_id] = session[:user_id]
         @book = Book.new(book_params)
         #データをインスタンス化して@bookに格納する。
         if @book.save
@@ -57,11 +58,7 @@ class BooksController < ApplicationController
     end
     
     def set_book
-        @book = Book.find(params[:id])
-    end
-    
-    def redirect_to_signin
-        redirect_to signin_path if session[:user_id].blank?
+        @book = Book.where(user_id: session[:user_id]).find(params[:id])
     end
     
     def set_params

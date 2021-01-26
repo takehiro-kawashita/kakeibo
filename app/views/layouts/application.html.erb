@@ -14,10 +14,11 @@
 
   <body>
     <nav class="navbar navbar-light bg-light">
-      <div class="navbar-brand">家計簿アプリ</div>
+      <a href="/" class="navbar-brand">家計簿アプリ</a>
       <div>
         <% if session[:user_id].present? %>
-          <%= link_to "ログアウト",signout_path,class: "btn btn-outline-secondary"%>
+          <%= link_to "登録内容の更新",edit_user_path,class: "btn btn-outline-info" %>
+          <%= link_to "ログアウト",signout_path,class: "btn btn-outline-secondary" %>
         <% else %>
           <%= link_to "会員登録",signup_path,class: "btn btn-outline-primary" %>
         <% end %>

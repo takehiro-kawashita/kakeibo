@@ -17,15 +17,14 @@ class SessionController < ApplicationController
         end
     end
     
-    private
-    
-    def redirect_to_books
-      redirect_to books_path if session[:user_id].present?
-    end
-    
     def destroy
       session[:user_id] = nil
       redirect_to signin_path
     end
     
+    private
+    
+    def redirect_to_books
+      redirect_to books_path if session[:user_id].present?
+    end
 end
