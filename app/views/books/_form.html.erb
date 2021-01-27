@@ -28,6 +28,12 @@
         <%= f.number_field:amount,class:"form-control" %>
     </div>
     
+    <div class="form-group">
+        <label>メモ</label>
+        <%= f.text_area:memo,class:"form-control" %>
+    </div>
+    
+    
     <%= link_to "戻る",books_path,class:"btn btn-secondary" %>
     <%= f.submit type,class:"btn btn-primary"%>
 <% end %>

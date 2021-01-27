@@ -5,16 +5,17 @@
   <div class="card-body">
     <%= form_with method: "get", local: true do |f| %>
       <div class="form-row">
-<div class="col">
-<%= f.number_field "year", placeholder: "年度を入力", class: "form-
-control" %>
+        <div class="col">
+            <%= f.number_field "year", placeholder: "年度を入力", class: "form-control" %>
         </div>
-<div class="col">
-<%= f.number_field "month", placeholder: "対象月を入力", class: "form-
-control" %>
+        <div class="col">
+            <%= f.number_field "month", placeholder: "対象月を入力", class: "form-control" %>
         </div>
-<div class="col">
-<%= f.submit "検索", class: "btn btn-primary" %>
+        <div class="col">
+            <%= f.select :inout,[["収入",1],["支出",2]],{prompt:"対象区分を入力"},{class: "form-control"} %>
+        </div>
+        <div class="col">
+            <%= f.submit "検索", class: "btn btn-primary" %>
         </div>
       </div>
     <% end %>
@@ -29,6 +30,7 @@ control" %>
         <th>区分</th>
         <th>科目</th>
         <th>金額</th>
+        <th>メモ</th>
         <th>リンク</th>
     </tr>
     
@@ -48,6 +50,7 @@ control" %>
         </td>
         <td><%= book.category %></td>
         <td><%= book.amount %>万円</td>
+        <td><%= book.memo %></td>
         <td>
             <%= link_to "詳細",book_path(book),class: "btn btn-info" %> 
             <!--ボタンを押したshowファイルを表示する。-->
@@ -71,6 +74,7 @@ control" %>
         <td></td>
         <td>合計</td>
         <td><%= sum %>万円（収入:<%= income %>万円、支出:<%= (sum - income).abs%>万円）</td>
+        <td></td>
         <td></td>
     </tr>
 </table>

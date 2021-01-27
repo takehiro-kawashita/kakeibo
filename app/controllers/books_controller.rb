@@ -7,6 +7,9 @@ class BooksController < ApplicationController
         @books = Book.where(user_id: session[:user_id]) #家計簿データをすべて取得(allメソッド)
         @books = @books.where(year: params[:year]) if params[:year].present?
         @books = @books.where(month: params[:month]) if params[:month].present?
+        @books = @books.where(inout: params[:inout]) if params[:inout].present?
+        
+        @books = @books.order(amount:"DESC")
     end
     
     def show
@@ -62,6 +65,6 @@ class BooksController < ApplicationController
     end
     
     def set_params
-         params.require(:book).permit(:year,:month,:inout,:category,:amount)
+         params.require(:book).permit(:year,:month,:inout,:category,:amount,:memo)
     end
 end

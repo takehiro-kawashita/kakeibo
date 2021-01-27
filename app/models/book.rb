@@ -8,5 +8,6 @@ class Book < ApplicationRecord
     validates :inout, presence: true
     validates :category, presence: true
     validates :amount, presence: true
+    # validates :memo,presence: true
     
 end
